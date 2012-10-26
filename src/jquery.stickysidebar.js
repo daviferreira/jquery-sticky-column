@@ -65,6 +65,7 @@
             sidebarOffsetTop = this.sidebar.offset().top - this.boundaries.contentTop;
             this.sidebar.removeClass('top-fixed')
                 .css({
+                    position: 'absolute',
                     top: sidebarOffsetTop
                 })
                 .addClass('scrolling-down');
