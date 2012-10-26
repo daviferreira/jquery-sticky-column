@@ -92,6 +92,7 @@ article:first-child {
     margin-top: 0;
 }
 
-.content {
-    margin-bottom: 20px;
+#my-content, #my-content-2 {
+    margin-bottom: 80px;
+    border-bottom: 12px solid #999;
 }
