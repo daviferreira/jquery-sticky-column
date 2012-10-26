@@ -11,26 +11,16 @@ module.exports = function(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
-    concat: {
-      js: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/jquery.<%= pkg.name %>.js>'],
-        dest: 'dist/<%= pkg.name %>.js'
-      },
-      css: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/jquery.<%= pkg.name %>.css>'],
-        dest: 'dist/<%= pkg.name %>.css'
-      }
-    },
     min: {
       js: {
-        src: ['<banner:meta.banner>', '<config:concat.js.dest>'],
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: 'src/jquery.<%= pkg.name %>.js',
+        dest: 'dist/jquery.<%= pkg.name %>.min.js'
       }
     },
     cssmin: {
       css: {
-        src: '<config:concat.css.dest>',
-        dest: 'dist/<%= pkg.name %>.min.css'
+        src: 'src/jquery.<%= pkg.name %>.css',
+        dest: 'dist/jquery.<%= pkg.name %>.min.css'
       }
     },
     csslint: {
@@ -72,6 +62,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-css');
 
-  grunt.registerTask('default', 'lint concat min cssmin csslint');
+  grunt.registerTask('default', 'lint min cssmin csslint');
 
 };
