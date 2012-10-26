@@ -1,14 +1,15 @@
 /*jslint browser:true */
 /*global jQuery*/
-'use strict';
 
 (function ($, window, undefined) {
+    'use strict';
 
     var pluginName = 'stickySidebar',
         document = window.document,
         defaults = {
             sidebar: '.sidebar',
-            content: '.content'
+            content: '.content',
+            diff: 105
         };
 
     function Plugin(element, options) {
@@ -50,8 +51,7 @@
     };
 
     Plugin.prototype.positionSidebar = function () {
-        if (this.lastScrollTop > this.boundaries.contentTop
-                && this.lastScrollTop < this.boundaries.contentBottom) {
+        if (this.lastScrollTop > this.boundaries.contentTop && this.lastScrollTop < this.boundaries.contentBottom) {
             this[this.scrollDirection === 'DOWN' ? 'scrollDown' : 'scrollUp']();
         } else if (this.lastScrollTop < this.boundaries.contentTop) {
             this.sidebar.css('top', '').removeClass('top-fixed');
@@ -66,13 +66,17 @@
             sidebarOffsetTop = this.sidebar.offset().top - this.boundaries.contentTop;
             this.sidebar.removeClass('top-fixed')
                 .css({
+                    position: 'absolute',
                     top: sidebarOffsetTop
                 })
                 .addClass('scrolling-down');
         }
         if (this.sidebar.hasClass('scrolling-down')) {
             if (windowScroll > this.sidebar.offset().top + this.boundaries.sidebarHeight) {
-                this.sidebar.addClass('bottom-fixed').css('top', '').removeClass('scrolling-down');
+                this.sidebar.css({
+                    position: '',
+                    top: ''
+                }).addClass('bottom-fixed').removeClass('scrolling-down');
             }
         } else {
             if (windowScroll > this.boundaries.contentBottom) {
@@ -80,8 +84,11 @@
                     position: 'absolute',
                     top: this.boundaries.contentHeight - this.boundaries.sidebarHeight
                 });
-            } else if (windowScroll > this.boundaries.sidebarHeight + this.boundaries.contentTop) {
-                this.sidebar.css('top', '').removeClass('top-fixed').addClass('bottom-fixed');
+            } else if (windowScroll + this.options.diff > this.boundaries.sidebarHeight + this.boundaries.contentTop) {
+                this.sidebar.css({
+                    position: '',
+                    top: ''
+                }).removeClass('top-fixed').addClass('bottom-fixed');
             }
         }
     };
@@ -95,15 +102,19 @@
         }
         if (this.sidebar.hasClass('scrolling-up')) {
             if (this.lastScrollTop < this.sidebar.offset().top) {
-                this.sidebar.css('top', '')
-                            .addClass('top-fixed')
-                            .removeClass('scrolling-up');
+                this.sidebar.css({
+                    position: '',
+                    top: ''
+                }).addClass('top-fixed').removeClass('scrolling-up');
             }
         } else {
             if (this.lastScrollTop < this.boundaries.contentTop) {
                 this.sidebar.css('position', '').removeClass('top-fixed');
-            } else if (this.lastScrollTop < this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
-                this.sidebar.css('top', '').removeClass('bottom-fixed').addClass('top-fixed');
+            } else if (this.lastScrollTop - this.options.diff < this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
+                this.sidebar.css({
+                    position: '',
+                    top: ''
+                }).removeClass('bottom-fixed').addClass('top-fixed');
             }
         }
     };
