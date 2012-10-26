@@ -9,7 +9,7 @@
         defaults = {
             sidebar: '.sidebar',
             content: '.content',
-            diff: 105
+            diff: 110
         };
 
     function Plugin(element, options) {
