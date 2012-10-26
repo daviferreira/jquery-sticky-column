@@ -8,7 +8,8 @@
         document = window.document,
         defaults = {
             sidebar: '.sidebar',
-            content: '.content'
+            content: '.content',
+            diff: 105
         };
 
     function Plugin(element, options) {
@@ -83,7 +84,7 @@
                     position: 'absolute',
                     top: this.boundaries.contentHeight - this.boundaries.sidebarHeight
                 });
-            } else if (windowScroll > this.boundaries.sidebarHeight + this.boundaries.contentTop) {
+            } else if (windowScroll + this.options.diff > this.boundaries.sidebarHeight + this.boundaries.contentTop) {
                 this.sidebar.css({
                     position: '',
                     top: ''
@@ -109,7 +110,7 @@
         } else {
             if (this.lastScrollTop < this.boundaries.contentTop) {
                 this.sidebar.css('position', '').removeClass('top-fixed');
-            } else if (this.lastScrollTop < this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
+            } else if (this.lastScrollTop - this.options.diff < this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
                 this.sidebar.css({
                     position: '',
                     top: ''
