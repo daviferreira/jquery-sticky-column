@@ -60,23 +60,51 @@
     };
 
     Plugin.prototype.scrollDown = function () {
-        this.sidebar.removeClass('scrolling-up').addClass('scrolling-down');
-        if (this.lastScrollTop + this.boundaries.windowHeight > this.boundaries.contentBottom) {
-            this.sidebar.removeClass('bottom-fixed').css({
-                position: 'absolute',
-                top: this.boundaries.contentHeight - this.boundaries.sidebarHeight
-            });
-        } else if (this.lastScrollTop + this.boundaries.windowHeight > this.boundaries.sidebarHeight + this.boundaries.contentTop) {
-            this.sidebar.css('top', '').removeClass('top-fixed').addClass('bottom-fixed');
+        var windowScroll = this.lastScrollTop + this.boundaries.windowHeight,
+            sidebarOffsetTop;
+        if (this.sidebar.hasClass('top-fixed')) {
+            sidebarOffsetTop = this.sidebar.offset().top - this.boundaries.contentTop;
+            this.sidebar.removeClass('top-fixed')
+                .css({
+                    top: sidebarOffsetTop
+                })
+                .addClass('scrolling-down');
+        }
+        if (this.sidebar.hasClass('scrolling-down')) {
+            if (windowScroll > this.sidebar.offset().top + this.boundaries.sidebarHeight) {
+                this.sidebar.addClass('bottom-fixed').css('top', '').removeClass('scrolling-down');
+            }
+        } else {
+            if (windowScroll > this.boundaries.contentBottom) {
+                this.sidebar.removeClass('bottom-fixed').css({
+                    position: 'absolute',
+                    top: this.boundaries.contentHeight - this.boundaries.sidebarHeight
+                });
+            } else if (windowScroll > this.boundaries.sidebarHeight + this.boundaries.contentTop) {
+                this.sidebar.css('top', '').removeClass('top-fixed').addClass('bottom-fixed');
+            }
         }
     };
 
     Plugin.prototype.scrollUp = function () {
-        this.sidebar.removeClass('scrolling-down').addClass('scrolling-up');
-        if (this.lastScrollTop < this.boundaries.contentTop) {
-            this.sidebar.css('position', '').removeClass('top-fixed');
-        } else if (this.lastScrollTop < this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
-            this.sidebar.css('top', '').removeClass('bottom-fixed').addClass('top-fixed');
+        if (this.sidebar.hasClass('bottom-fixed')) {
+            this.sidebar.css({
+                position: 'absolute',
+                top: this.sidebar.offset().top - this.boundaries.contentTop
+            }).removeClass('bottom-fixed').addClass('scrolling-up');
+        }
+        if (this.sidebar.hasClass('scrolling-up')) {
+            if (this.lastScrollTop < this.sidebar.offset().top) {
+                this.sidebar.css('top', '')
+                            .addClass('top-fixed')
+                            .removeClass('scrolling-up');
+            }
+        } else {
+            if (this.lastScrollTop < this.boundaries.contentTop) {
+                this.sidebar.css('position', '').removeClass('top-fixed');
+            } else if (this.lastScrollTop < this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
+                this.sidebar.css('top', '').removeClass('bottom-fixed').addClass('top-fixed');
+            }
         }
     };
 
