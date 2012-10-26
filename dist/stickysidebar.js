@@ -1,4 +1,7 @@
-/*jslint browser:true */
+/*! jQuery Sticky Sidebar plugin - v0.1.0 - 2012-10-26
+* https://github.com/daviferreira/jquery_sticky_sidebar/
+* Copyright (c) 2012 Davi Ferreira; Licensed THE BEER-WARE LICENSE */
+
 /*global jQuery*/
 
 (function ($, window, undefined) {
