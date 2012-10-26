@@ -59,13 +59,11 @@
     };
 
     Plugin.prototype.scrollDown = function () {
-        var windowScroll = this.lastScrollTop + this.boundaries.windowHeight,
-            sidebarOffsetTop;
+        var windowScroll = this.lastScrollTop + this.boundaries.windowHeight;
         if (this.sidebar.hasClass('top-fixed')) {
-            sidebarOffsetTop = this.sidebar.offset().top - this.boundaries.contentTop;
             this.sidebar.removeClass('top-fixed')
                 .css({
-                    top: sidebarOffsetTop
+                    top: this.sidebar.offset().top - this.boundaries.contentTop
                 })
                 .addClass('scrolling-down');
         }
