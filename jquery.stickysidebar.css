@@ -1,0 +1,10 @@
+.top-fixed {
+    position: fixed!important;
+    top: 0;
+}
+
+.bottom-fixed {
+    position:fixed!important;
+    bottom: 0;
+}
+
