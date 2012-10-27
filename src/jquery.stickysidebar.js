@@ -9,7 +9,11 @@
         defaults = {
             sidebar: '.sidebar',
             content: '.content',
-            diff: 110
+            tolerance: 110
+        },
+        clearPosition = {
+            position: '',
+            top: ''
         };
 
     function Plugin(element, options) {
@@ -30,11 +34,18 @@
         this.content = this.root.find(this.options.content);
         this.lastScrollTop = 0;
 
-        $(window).bind('scroll.sidebar', function () {
-            self.setScrollDirection()
-                .setBoundaries()
-                .positionSidebar();
-        });
+        if (this.canBeSticky() === true) {
+            $(window).bind('scroll.sticky_sidebar', function () {
+                self.setScrollDirection()
+                    .setBoundaries()
+                    .positionSidebar();
+            });
+        }
+    };
+
+    Plugin.prototype.canBeSticky = function () {
+        return this.sidebar.height() < this.content.height() && 
+               this.sidebar.height() > $(window).height();
     };
 
     Plugin.prototype.setBoundaries = function () {
@@ -51,7 +62,8 @@
     };
 
     Plugin.prototype.positionSidebar = function () {
-        if (this.lastScrollTop > this.boundaries.contentTop && this.lastScrollTop < this.boundaries.contentBottom) {
+        if (this.lastScrollTop > this.boundaries.contentTop &&
+            this.lastScrollTop < this.boundaries.contentBottom) {
             this[this.scrollDirection === 'DOWN' ? 'scrollDown' : 'scrollUp']();
         } else if (this.lastScrollTop < this.boundaries.contentTop) {
             this.sidebar.css('top', '').removeClass('top-fixed');
@@ -73,10 +85,9 @@
         }
         if (this.sidebar.hasClass('scrolling-down')) {
             if (windowScroll > this.sidebar.offset().top + this.boundaries.sidebarHeight) {
-                this.sidebar.css({
-                    position: '',
-                    top: ''
-                }).addClass('bottom-fixed').removeClass('scrolling-down');
+                this.sidebar.css(clearPosition)
+                            .addClass('bottom-fixed')
+                            .removeClass('scrolling-down');
             }
         } else {
             if (windowScroll > this.boundaries.contentBottom) {
@@ -84,11 +95,11 @@
                     position: 'absolute',
                     top: this.boundaries.contentHeight - this.boundaries.sidebarHeight
                 });
-            } else if (windowScroll + this.options.diff > this.boundaries.sidebarHeight + this.boundaries.contentTop) {
-                this.sidebar.css({
-                    position: '',
-                    top: ''
-                }).removeClass('top-fixed').addClass('bottom-fixed');
+            } else if (windowScroll + this.options.tolerance >
+                       this.boundaries.sidebarHeight + this.boundaries.contentTop) {
+                this.sidebar.css(clearPosition)
+                            .removeClass('top-fixed')
+                            .addClass('bottom-fixed');
             }
         }
     };
@@ -102,19 +113,18 @@
         }
         if (this.sidebar.hasClass('scrolling-up')) {
             if (this.lastScrollTop < this.sidebar.offset().top) {
-                this.sidebar.css({
-                    position: '',
-                    top: ''
-                }).addClass('top-fixed').removeClass('scrolling-up');
+                this.sidebar.css(clearPosition)
+                            .addClass('top-fixed')
+                            .removeClass('scrolling-up');
             }
         } else {
             if (this.lastScrollTop < this.boundaries.contentTop) {
                 this.sidebar.css('position', '').removeClass('top-fixed');
-            } else if (this.lastScrollTop - this.options.diff < this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
-                this.sidebar.css({
-                    position: '',
-                    top: ''
-                }).removeClass('bottom-fixed').addClass('top-fixed');
+            } else if (this.lastScrollTop - this.options.tolerance <
+                       this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
+                this.sidebar.css(clearPosition)
+                            .removeClass('bottom-fixed')
+                            .addClass('top-fixed');
             }
         }
     };

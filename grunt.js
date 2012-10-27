@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             }
         },
         lint: {
-            files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
+            files: ['grunt.js', 'src/**/*sticky*.js', 'test/**/*.js']
         },
         watch: {
             files: '<config:lint.files>',
@@ -56,11 +56,17 @@ module.exports = function(grunt) {
                 jQuery: true
             }
         },
-        uglify: {}
+        uglify: {},
+        jasmine : {
+            src : 'src/**/*.js',
+            specs : 'spec/**/*_spec.js',
+            helpers : 'spec/helpers/*.js'
+        }
     });
 
     grunt.loadNpmTasks('grunt-css');
+    grunt.loadNpmTasks('grunt-jasmine-runner');
 
-    grunt.registerTask('default', 'lint min cssmin csslint');
+    grunt.registerTask('default', 'lint min cssmin csslint jasmine');
 
 };
