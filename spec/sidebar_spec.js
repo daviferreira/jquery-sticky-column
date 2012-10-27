@@ -7,6 +7,7 @@ describe('StickySidebar', function () {
             }
         });
         setFixtures('<div id="container"><div class="content"></div><div class="sidebar"></div></div>');
+        setStyleFixtures('.bottom-fixed {position: fixed; bottom: 0;}.top-fixed {position: fixed; top: 0;}');
     });
 
     it('should be a jQuery plugin', function () {
@@ -42,52 +43,59 @@ describe('StickySidebar', function () {
         });
     });
 
-    describe('Scroll down', function () {
-        it('should add class "bottom-fixed" when scroll reaches the bottom of the sidebar', function () {
-            $('body').height(2000);
-            $('.content').height(1000);
-            $('.sidebar').height(800);
-            $('#container').stickySidebar({tolerance: 0});
-            window.scrollTo(0, 810);
-            $(window).trigger('scroll');
-            expect($('.sidebar')).toHaveClass('bottom-fixed');
-            $('body').height('auto');
-        });
-
-        it('should remove "scrolling-up" class if it exists and add "scrolling-down"', function () {
+    describe('Scrolling', function () {
+        beforeEach(function () {
+            window.scrollTo(0, 0);
         });
 
 
-        it('should calculate absolute offset if sidebar has class top-fixed', function () {
+        describe('Scroll down', function () {
+            it('should add class "bottom-fixed" when scroll reaches the bottom of the sidebar', function () {
+                $('.content').height(1000);
+                $('.sidebar').height(500);
+                $('#container').stickySidebar({tolerance: 0});
+                window.scrollTo(0, 550);
+                $(window).trigger('scroll');
+                expect($('.sidebar')).toHaveClass('bottom-fixed');
+            });
+
+            it('should remove "scrolling-up" class if it exists and add "scrolling-down"', function () {
+            });
+
+
+            it('should calculate absolute offset if sidebar has class top-fixed', function () {
+            });
+
+            it('should clear position if scroll is out of boundaries', function () {
+            });
         });
 
-        it('should clear position if scroll is out of boundaries', function () {
-        });
-    });
+        describe('Scroll up', function () {
 
-    describe('Scroll up', function () {
+            it('should add class "top-fixed" when sidebar reaches the top of the sidebar', function () {
+                $('.content').height(2000);
+                $('.sidebar').height(500);
+                $('#container').stickySidebar({tolerance: 0});
+                window.scrollTo(0, 2000);
+                $(window).trigger('scroll');
+                window.scrollTo(0, 1800);
+                $(window).trigger('scroll');
+                window.scrollTo(0, 1000);
+                $(window).trigger('scroll');
+                expect($('.sidebar')).toHaveClass('top-fixed');
+            });
 
-        it('should add class "top-fixed" when sidebar reaches the top of the sidebar', function () {
-            $('body').height(2000);
-            $('.content').height(1000);
-            $('.sidebar').height(800);
-            $('#container').stickySidebar({tolerance: 0});
-            window.scrollTo(0, 1000);
-            $(window).trigger('scroll');
-            window.scrollTo(0, 400);
-            $(window).trigger('scroll');
-            expect($('.sidebar')).toHaveClass('top-fixed');
-            $('body').height('auto');
+            it('should remove "scrolling-down" class if it exists and add "scrolling-up"', function () {
+            });
+
+            it('should calculate absolute offset if sidebar has class bottom-fixed', function () {
+            });
+
+            it('should clear position if scroll is out of boundaries', function () {
+            });
         });
 
-        it('should remove "scrolling-down" class if it exists and add "scrolling-up"', function () {
-        });
 
-        it('should calculate absolute offset if sidebar has class bottom-fixed', function () {
-        });
-
-        it('should clear position if scroll is out of boundaries', function () {
-        });
     });
 
 });

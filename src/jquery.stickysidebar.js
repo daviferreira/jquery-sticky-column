@@ -86,7 +86,7 @@
                 })
                 .addClass('scrolling-down');
         }
-          if (this.sidebar.hasClass('scrolling-down')) {
+        if (this.sidebar.hasClass('scrolling-down')) {
             if (windowScroll > this.sidebar.offset().top + this.boundaries.sidebarHeight) {
                 this.sidebar.css(clearPosition)
                             .addClass('bottom-fixed')
@@ -109,8 +109,8 @@
 
     Plugin.prototype.scrollUp = function () {
         if (this.sidebar.hasClass('scrolling-down')) {
-          this.sidebar.removeClass('scrolling-down') 
-                      .addClass('scrolling-up');
+            this.sidebar.removeClass('scrolling-down') 
+                        .addClass('scrolling-up');
         } else if (this.sidebar.hasClass('bottom-fixed')) {
             this.sidebar.css({
                 position: 'absolute',
