@@ -72,7 +72,6 @@ describe('StickySidebar', function () {
             $(window).trigger('scroll');
             window.scrollTo(0, 400);
             $(window).trigger('scroll');
-            console.log($('.sidebar')[0].className.split(/\s+/));
             expect($('.sidebar')).toHaveClass('top-fixed');
             $('body').height('auto');
 
