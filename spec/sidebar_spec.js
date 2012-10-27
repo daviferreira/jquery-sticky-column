@@ -54,6 +54,10 @@ describe('StickySidebar', function () {
             $('body').height('auto');
         });
 
+        it('should remove "scrolling-up" class if it exists and add "scrolling-down"', function () {
+        });
+
+
         it('should calculate absolute offset if sidebar has class top-fixed', function () {
         });
 
@@ -74,7 +78,9 @@ describe('StickySidebar', function () {
             $(window).trigger('scroll');
             expect($('.sidebar')).toHaveClass('top-fixed');
             $('body').height('auto');
+        });
 
+        it('should remove "scrolling-down" class if it exists and add "scrolling-up"', function () {
         });
 
         it('should calculate absolute offset if sidebar has class bottom-fixed', function () {
