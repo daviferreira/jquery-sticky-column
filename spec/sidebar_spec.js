@@ -33,7 +33,7 @@ describe('StickySidebar', function () {
     });
 
     describe('Initialization', function () {
-        it('should bind stickySidebar to window scroll event', function () {
+        it('should bind stickySidebar to window.scrollTo event', function () {
             $('.content').height(2000);
             $('.sidebar').height(1800);
             $('#container').stickySidebar();
@@ -43,45 +43,45 @@ describe('StickySidebar', function () {
     });
 
     describe('Scroll down', function () {
-        it('should add class "scrolling-down"', function () {
+        it('should add class "bottom-fixed" when scroll reaches the bottom of the sidebar', function () {
             $('body').height(2000);
-            $('.content').height(2000);
-            $('.sidebar').height(1800);
-            $('#container').stickySidebar();
-            setTimeout(function () {
-                window.scroll(0, 500);
-                expect($('.sidebar')).not.toHaveClass('scrolling-up');
-                expect($('.sidebar')).toHaveClass('scrolling-down');
-                $('body').height('auto');
-            }, 100);
-        });
-
-        it('should add class "bottom-fixed" when sidebar reaches the bottom of the container', function () {
+            $('.content').height(1000);
+            $('.sidebar').height(800);
+            $('#container').stickySidebar({tolerance: 0});
+            window.scrollTo(0, 810);
+            $(window).trigger('scroll');
+            expect($('.sidebar')).toHaveClass('bottom-fixed');
+            $('body').height('auto');
         });
 
         it('should calculate absolute offset if sidebar has class top-fixed', function () {
         });
+
+        it('should clear position if scroll is out of boundaries', function () {
+        });
     });
 
     describe('Scroll up', function () {
-        it('should add class "scrolling-up"', function () {
-            $('body').height(2000);
-            $('.content').height(2000);
-            $('.sidebar').height(1800);
-            $('#container').stickySidebar();
-            window.scroll(0, 500);
-            setTimeout(function () {
-                window.scroll(0, 0);
-                expect($('.sidebar')).not.toHaveClass('scrolling-down');
-                expect($('.sidebar')).toHaveClass('scrolling-up');
-                $('body').height('auto');
-            }, 100);
-        });
 
-        it('should add class "top-fixed" when sidebar reaches the top of the container', function () {
+        it('should add class "top-fixed" when sidebar reaches the top of the sidebar', function () {
+            $('body').height(2000);
+            $('.content').height(1000);
+            $('.sidebar').height(800);
+            $('#container').stickySidebar({tolerance: 0});
+            window.scrollTo(0, 1000);
+            $(window).trigger('scroll');
+            window.scrollTo(0, 400);
+            $(window).trigger('scroll');
+            console.log($('.sidebar')[0].className.split(/\s+/));
+            expect($('.sidebar')).toHaveClass('top-fixed');
+            $('body').height('auto');
+
         });
 
         it('should calculate absolute offset if sidebar has class bottom-fixed', function () {
+        });
+
+        it('should clear position if scroll is out of boundaries', function () {
         });
     });
 
