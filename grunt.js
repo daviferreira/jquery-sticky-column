@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             }
         },
         lint: {
-            files: ['grunt.js', 'src/**/*sticky*.js', 'test/**/*.js']
+            files: ['grunt.js', 'src/**/*sticky*.js']
         },
         watch: {
             files: '<config:lint.files>',
