@@ -60,8 +60,15 @@ describe('StickySidebar', function () {
             });
 
             it('should remove "scrolling-up" class if it exists and add "scrolling-down"', function () {
+                $('.content').height(1000);
+                $('.sidebar').height(500);
+                $('#container').stickySidebar({tolerance: 0});
+                $('.sidebar').addClass('scrolling-up');
+                window.scrollTo(0, 550);
+                $(window).trigger('scroll');
+                expect($('.sidebar')).toHaveClass('scrolling-down');
+                expect($('.sidebar')).not.toHaveClass('scrolling-up');
             });
-
 
             it('should calculate absolute offset if sidebar has class top-fixed', function () {
             });
@@ -86,6 +93,16 @@ describe('StickySidebar', function () {
             });
 
             it('should remove "scrolling-down" class if it exists and add "scrolling-up"', function () {
+                $('.content').height(1000);
+                $('.sidebar').height(500);
+                $('#container').stickySidebar({tolerance: 0});
+                window.scrollTo(0, 850);
+                $(window).trigger('scroll');
+                $('.sidebar').addClass('scrolling-down');
+                window.scrollTo(0, 800);
+                $(window).trigger('scroll');
+                expect($('.sidebar')).toHaveClass('scrolling-up');
+                expect($('.sidebar')).not.toHaveClass('scrolling-down');
             });
 
             it('should calculate absolute offset if sidebar has class bottom-fixed', function () {
