@@ -44,7 +44,7 @@
     };
 
     Plugin.prototype.canBeSticky = function () {
-        return this.sidebar.height() < this.content.height() && 
+        return this.sidebar.height() < this.content.height() &&
                this.sidebar.height() > $(window).height();
     };
 
@@ -63,7 +63,7 @@
 
     Plugin.prototype.positionSidebar = function () {
         if (this.lastScrollTop > this.boundaries.contentTop &&
-            this.lastScrollTop < this.boundaries.contentBottom) {
+                this.lastScrollTop < this.boundaries.contentBottom) {
             this[this.scrollDirection === 'DOWN' ? 'scrollDown' : 'scrollUp']();
         } else if (this.lastScrollTop < this.boundaries.contentTop) {
             this.sidebar.css('top', '').removeClass('top-fixed');
@@ -75,7 +75,7 @@
         var windowScroll = this.lastScrollTop + this.boundaries.windowHeight,
             sidebarOffsetTop;
         if (this.sidebar.hasClass('scrolling-up')) {
-            this.sidebar.removeClass('scrolling-up') 
+            this.sidebar.removeClass('scrolling-up')
                 .addClass('scrolling-down');
         } else if (this.sidebar.hasClass('top-fixed')) {
             sidebarOffsetTop = this.sidebar.offset().top - this.boundaries.contentTop;
@@ -109,7 +109,7 @@
 
     Plugin.prototype.scrollUp = function () {
         if (this.sidebar.hasClass('scrolling-down')) {
-            this.sidebar.removeClass('scrolling-down') 
+            this.sidebar.removeClass('scrolling-down')
                         .addClass('scrolling-up');
         } else if (this.sidebar.hasClass('bottom-fixed')) {
             this.sidebar.css({
