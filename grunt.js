@@ -58,9 +58,12 @@ module.exports = function(grunt) {
         },
         uglify: {},
         jasmine : {
-            src : 'src/**/*.js',
-            specs : 'spec/**/*_spec.js',
-            helpers : 'spec/helpers/*.js'
+            src: 'src/**/*.js',
+            specs: 'spec/**/*_spec.js',
+            helpers: 'spec/helpers/*.js',
+            server: {
+                port: 8889
+            }
         }
     });
 
