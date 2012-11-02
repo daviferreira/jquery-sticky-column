@@ -7,7 +7,7 @@ describe('StickySidebar', function () {
             }
         });
         setFixtures('<div id="container"><div class="content"></div><div class="sidebar"></div></div>');
-        setStyleFixtures('.bottom-fixed {position: fixed; bottom: 0;}.top-fixed {position: fixed; top: 0;}');
+        setStyleFixtures('#container{position: relative;}.bottom-fixed {position: fixed; bottom: 0;}.top-fixed {position: fixed; top: 0;}');
     });
 
     it('should be a jQuery plugin', function () {
