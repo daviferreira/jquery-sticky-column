@@ -22,7 +22,10 @@
     }
   ],
   "dependencies": {
-    "jquery": "*"
+    "jquery": "*",
+    "grunt-css": "*",
+    "grunt-jasmine-runner": "*",
+    "jasmine-jquery": "*"
   },
   "keywords": []
 }
