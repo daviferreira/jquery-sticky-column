@@ -48,7 +48,6 @@ describe('StickySidebar', function () {
             window.scrollTo(0, 0);
         });
 
-
         describe('Scroll down', function () {
             it('should add class "bottom-fixed" when scroll reaches the bottom of the sidebar', function () {
                 $('.content').height(1000);
@@ -98,7 +97,6 @@ describe('StickySidebar', function () {
                 $('#container').stickySidebar({tolerance: 0});
                 window.scrollTo(0, 850);
                 $(window).trigger('scroll');
-                $('.sidebar').addClass('scrolling-down');
                 window.scrollTo(0, 800);
                 $(window).trigger('scroll');
                 expect($('.sidebar')).toHaveClass('scrolling-up');
@@ -106,6 +104,18 @@ describe('StickySidebar', function () {
             });
 
             it('should calculate absolute offset if sidebar has class bottom-fixed', function () {
+                $('.content').height(1000);
+                $('.sidebar').height(500);
+                $('#container').stickySidebar({tolerance: 0});
+                window.scrollTo(0, 850);
+                $(window).trigger('scroll');
+                expect($('.sidebar')).toHaveClass('bottom-fixed');
+                window.scrollTo(0, 830);
+                $(window).trigger('scroll');
+                expect($('.sidebar')).not.toHaveClass('bottom-fixed');
+                expect($('.sidebar')).toHaveClass('scrolling-up');
+                expect($('.sidebar')).toHaveCss({position: 'absolute',
+                                                 top: '112px'});
             });
 
             it('should clear position if scroll is out of boundaries', function () {
