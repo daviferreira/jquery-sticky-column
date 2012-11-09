@@ -61,6 +61,7 @@ module.exports = function(grunt) {
             src: 'src/**/*.js',
             specs: 'spec/**/*_spec.js',
             helpers: 'spec/helpers/*.js',
+            template : 'src/SpecRunner.tmpl',
             server: {
                 port: 8889
             }
