@@ -28,6 +28,10 @@
     "jasmine-jquery": "*"
   },
   "devDependencies": {
+    "jquery": "*",
+    "grunt-jasmine-runner" : "latest",
+    "grunt-css": "*",
+    "jasmine-jquery": "*"
     "grunt": "~0.3.17"
   },
   "keywords": [],
