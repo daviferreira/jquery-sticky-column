@@ -22,7 +22,7 @@
     }
   ],
   "dependencies": {
-    "jquery": "*",
+    "jQuery": "~1.7.3",
     "grunt-css": "*",
     "grunt-jasmine-runner": "*",
     "jasmine-jquery": "*"
