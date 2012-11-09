@@ -27,6 +27,9 @@
     "grunt-jasmine-runner": "*",
     "jasmine-jquery": "*"
   },
+  "devDependencies": {
+    "grunt": "~0.3.17"
+  },
   "keywords": [],
   "scripts": {
     "test": "grunt travis --verbose"
