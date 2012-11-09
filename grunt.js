@@ -72,4 +72,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', 'lint min cssmin csslint jasmine');
 
+    // Travis CI task.
+    grunt.registerTask('travis', 'lint csslint jasmine');
+
 };
