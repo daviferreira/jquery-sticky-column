@@ -27,5 +27,8 @@
     "grunt-jasmine-runner": "*",
     "jasmine-jquery": "*"
   },
-  "keywords": []
+  "keywords": [],
+  "scripts": {
+    "test": "grunt travis --verbose"
+  }
 }
