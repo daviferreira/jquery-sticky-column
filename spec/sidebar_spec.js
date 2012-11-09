@@ -70,9 +70,21 @@ describe('StickySidebar', function () {
             });
 
             it('should calculate absolute offset if sidebar has class top-fixed', function () {
-            });
-
-            it('should clear position if scroll is out of boundaries', function () {
+                $('.content').height(2000);
+                $('.sidebar').height(500);
+                $('#container').stickySidebar({tolerance: 0});
+                window.scrollTo(0, 2000);
+                $(window).trigger('scroll');
+                window.scrollTo(0, 1800);
+                $(window).trigger('scroll');
+                window.scrollTo(0, 1000);
+                $(window).trigger('scroll');
+                window.scrollTo(0, 1200);
+                $(window).trigger('scroll');
+                expect($('.sidebar')).not.toHaveClass('top-fixed');
+                expect($('.sidebar')).toHaveClass('scrolling-down');
+                expect($('.sidebar')).toHaveCss({position: 'absolute',
+                                                 top: '822px'});
             });
         });
 
@@ -115,10 +127,7 @@ describe('StickySidebar', function () {
                 expect($('.sidebar')).not.toHaveClass('bottom-fixed');
                 expect($('.sidebar')).toHaveClass('scrolling-up');
                 expect($('.sidebar')).toHaveCss({position: 'absolute',
-                                                 top: '112px'});
-            });
-
-            it('should clear position if scroll is out of boundaries', function () {
+                                                 top: '140px'});
             });
         });
 
