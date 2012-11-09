@@ -12,15 +12,13 @@
     <script type="text/javascript" src="/jasmine/lib/jasmine-core/jasmine.js"></script>
     <script type="text/javascript" src="/jasmine/lib/jasmine-core/jasmine-html.js"></script>
 -->
-    <script type="text/javascript" src="/src/jquery.min.js"></script>
-    <script type="text/javascript" src="/spec/helpers/jasmine-jquery.js"></script>
     <% scripts.forEach(function(script){ %>
     <script type="text/javascript" src="<%= script %>"></script>
     <% }) %>
 
     <% if (typeof specs !== 'undefined') { %>
         <script type="text/javascript">
-        require([
+        require(['jQuery', 'jasmine-jquery', 
         <% specs.forEach(function(script, i){ %>
             '<%= script %>' <% if (i !== specs.length-1){ %>,<% } %>
         <% }) %>
