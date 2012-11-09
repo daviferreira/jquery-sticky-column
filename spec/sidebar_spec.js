@@ -1,7 +1,3 @@
-if (typeof require === 'function') {
-    require('jQuery');
-}
-
 describe('StickySidebar', function () {
 
     beforeEach(function () {
