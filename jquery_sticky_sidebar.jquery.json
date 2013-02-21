@@ -1,0 +1,35 @@
+{
+    "name": "jquery_sticky_sidebar",
+    "title": "jQuery Sticky Sidebar",
+    "description": "jQuery plugin that allow you add sticky sidebars to your content.",
+    "keywords": [
+        "sidebar",
+        "navigation",
+        "sticky"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "Davi Ferreira",
+        "url": "http://www.daviferreira.com"
+    },
+    "maintainers": [
+        {
+            "name": "Davi Ferreira",
+            "email": "hi@daviferreira.com",
+            "url": "http://www.daviferreira.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "THE BEER-WARE LICENSE",
+            "url": "https://fedoraproject.org/wiki/Licensing/Beerware"
+        }
+    ],
+    "bugs": "https://github.com/daviferreira/jquery_sticky_sidebar/issues",
+    "homepage": "http://daviferreira.github.com/jquery_sticky_sidebar/",
+    "docs": "http://daviferreira.github.com/jquery_sticky_sidebar/",
+    "download": "https://github.com/daviferreira/jquery_sticky_sidebar",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
