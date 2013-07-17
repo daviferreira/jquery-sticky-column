@@ -6,8 +6,8 @@
 
     var pluginName = 'stickyColumn',
         defaults = {
-            column: '.column',
-            content: '.content',
+            column: '.jquery-sticky-column',
+            content: '.jquery-sticky-column-content',
             tolerance: 110
         },
         clearPosition = {
@@ -34,7 +34,7 @@
         this.lastScrollTop = 0;
 
         if (this.canBeSticky() === true) {
-            $(window).bind('scroll.sticky_column', function () {
+            $(window).bind('scroll.jquery_sticky_column', function () {
                 self.setScrollDirection()
                     .setBoundaries()
                     .positionColumn();
