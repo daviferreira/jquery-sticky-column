@@ -137,6 +137,8 @@ describe('StickyColumn', function () {
         });
     });
 
+
+    /*
     describe('Boundaries', function () {
         describe('Position column', function () {
             it('should reset column position when scrollTop is less than contentTop', function () {
@@ -153,7 +155,6 @@ describe('StickyColumn', function () {
             });
         });
 
-        /*
         describe('Scrolling up', function () {
             it('should reset column position when scrollTop is less than contentTop', function () {
             });
@@ -163,7 +164,7 @@ describe('StickyColumn', function () {
             it('should reset column position when windowScroll is greater than contentBottom', function () {
             });
         });
-        */
     });
+    */
 
 });
