@@ -5,6 +5,7 @@ describe('StickyColumn', function () {
     'use strict';
 
     beforeEach(function () {
+        $.fx.off = true;
         this.addMatchers({
             toHaveEvent: function (eventType) {
                 return (this.actual.data('events')) && (typeof this.actual.data('events')[eventType] === 'object');
@@ -134,8 +135,35 @@ describe('StickyColumn', function () {
                                                  top: ($('.jquery-sticky-column:first').offset().top - $('.jquery-sticky-column-content:first').offset().top) + 'px'});
             });
         });
+    });
 
+    describe('Boundaries', function () {
+        describe('Position column', function () {
+            it('should reset column position when scrollTop is less than contentTop', function () {
+                $('.jquery-sticky-column-content').height(1000).css('margin-top', 300);
+                $('.jquery-sticky-column').height(500).css('margin-top', 300).addClass('jquery-sticky-column-top-fixed');
+                $('#container').stickyColumn({tolerance: 0});
+                expect($('.jquery-sticky-column')).toHaveClass('jquery-sticky-column-top-fixed');
+                spyOn($.fn, 'css').andCallThrough();
+                window.scrollTo(0, 850);
+                $(window).trigger('scroll');
+                expect($('.jquery-sticky-column')).not.toHaveClass('jquery-sticky-column-top-fixed');
+                expect($.fn.css).toHaveBeenCalledWith('top', '');
+                expect($('.jquery-sticky-column').css('top')).toBe('auto');
+            });
+        });
 
+        /*
+        describe('Scrolling up', function () {
+            it('should reset column position when scrollTop is less than contentTop', function () {
+            });
+        });
+
+        describe('Scrolling down', function () {
+            it('should reset column position when windowScroll is greater than contentBottom', function () {
+            });
+        });
+        */
     });
 
 });
