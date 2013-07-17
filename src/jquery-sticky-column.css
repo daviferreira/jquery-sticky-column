@@ -1,9 +1,9 @@
-.top-fixed {
+.jquery-sticky-column-top-fixed {
     position: fixed;
     top: 0;
 }
 
-.bottom-fixed {
+.jquery-sticky-column-bottom-fixed {
     position:fixed;
     bottom: 0;
 }

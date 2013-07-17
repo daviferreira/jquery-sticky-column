@@ -65,7 +65,7 @@
                 this.lastScrollTop < this.boundaries.contentBottom) {
             this[this.scrollDirection === 'DOWN' ? 'scrollDown' : 'scrollUp']();
         } else if (this.lastScrollTop < this.boundaries.contentTop) {
-            this.column.css('top', '').removeClass('top-fixed');
+            this.column.css('top', '').removeClass('jquery-sticky-column-top-fixed');
         }
         return this;
     };
@@ -73,63 +73,63 @@
     Plugin.prototype.scrollDown = function () {
         var windowScroll = this.lastScrollTop + this.boundaries.windowHeight,
             columnOffsetTop;
-        if (this.column.hasClass('scrolling-up')) {
-            this.column.removeClass('scrolling-up')
-                .addClass('scrolling-down');
-        } else if (this.column.hasClass('top-fixed')) {
+        if (this.column.hasClass('jquery-sticky-column-scrolling-up')) {
+            this.column.removeClass('jquery-sticky-column-scrolling-up')
+                .addClass('jquery-sticky-column-scrolling-down');
+        } else if (this.column.hasClass('jquery-sticky-column-top-fixed')) {
             columnOffsetTop = this.column.offset().top - this.boundaries.contentTop;
-            this.column.removeClass('top-fixed')
+            this.column.removeClass('jquery-sticky-column-top-fixed')
                 .css({
                     position: 'absolute',
                     top: columnOffsetTop
                 })
-                .addClass('scrolling-down');
+                .addClass('jquery-sticky-column-scrolling-down');
         }
-        if (this.column.hasClass('scrolling-down')) {
+        if (this.column.hasClass('jquery-sticky-column-scrolling-down')) {
             if (windowScroll > this.column.offset().top + this.boundaries.columnHeight) {
                 this.column.css(clearPosition)
-                            .addClass('bottom-fixed')
-                            .removeClass('scrolling-down');
+                            .addClass('jquery-sticky-column-bottom-fixed')
+                            .removeClass('jquery-sticky-column-scrolling-down');
             }
         } else {
             if (windowScroll > this.boundaries.contentBottom) {
-                this.column.removeClass('bottom-fixed').css({
+                this.column.removeClass('jquery-sticky-column-bottom-fixed').css({
                     position: 'absolute',
                     top: this.boundaries.contentHeight - this.boundaries.columnHeight
                 });
             } else if (windowScroll + this.options.tolerance >
                        this.boundaries.columnHeight + this.boundaries.contentTop) {
                 this.column.css(clearPosition)
-                            .removeClass('top-fixed')
-                            .addClass('bottom-fixed');
+                            .removeClass('jquery-sticky-column-top-fixed')
+                            .addClass('jquery-sticky-column-bottom-fixed');
             }
         }
     };
 
     Plugin.prototype.scrollUp = function () {
-        if (this.column.hasClass('scrolling-down')) {
-            this.column.removeClass('scrolling-down')
-                        .addClass('scrolling-up');
-        } else if (this.column.hasClass('bottom-fixed')) {
+        if (this.column.hasClass('jquery-sticky-column-scrolling-down')) {
+            this.column.removeClass('jquery-sticky-column-scrolling-down')
+                        .addClass('jquery-sticky-column-scrolling-up');
+        } else if (this.column.hasClass('jquery-sticky-column-bottom-fixed')) {
             this.column.css({
                 position: 'absolute',
                 top: this.column.offset().top - this.boundaries.contentTop
-            }).removeClass('bottom-fixed').addClass('scrolling-up');
+            }).removeClass('jquery-sticky-column-bottom-fixed').addClass('jquery-sticky-column-scrolling-up');
         }
-        if (this.column.hasClass('scrolling-up')) {
+        if (this.column.hasClass('jquery-sticky-column-scrolling-up')) {
             if (this.lastScrollTop < this.column.offset().top) {
                 this.column.css(clearPosition)
-                            .addClass('top-fixed')
-                            .removeClass('scrolling-up');
+                            .addClass('jquery-sticky-column-top-fixed')
+                            .removeClass('jquery-sticky-column-scrolling-up');
             }
         } else {
             if (this.lastScrollTop < this.boundaries.contentTop) {
-                this.column.css('position', '').removeClass('top-fixed');
+                this.column.css('position', '').removeClass('jquery-sticky-column-top-fixed');
             } else if (this.lastScrollTop - this.options.tolerance <
                        this.boundaries.contentBottom - this.boundaries.columnHeight) {
                 this.column.css(clearPosition)
-                            .removeClass('bottom-fixed')
-                            .addClass('top-fixed');
+                            .removeClass('jquery-sticky-column-bottom-fixed')
+                            .addClass('jquery-sticky-column-top-fixed');
             }
         }
     };
