@@ -1,9 +1,13 @@
+/*global $, it, expect, spyOn, describe, beforeEach,
+         setFixtures, setStyleFixtures*/
 describe('StickySidebar', function () {
+
+    'use strict';
 
     beforeEach(function () {
         this.addMatchers({
             toHaveEvent: function (eventType) {
-                return (this.actual.data('events')) && (typeof this.actual.data('events')[eventType] == 'object');
+                return (this.actual.data('events')) && (typeof this.actual.data('events')[eventType] === 'object');
             }
         });
         setFixtures('<div id="container"><div class="content"></div><div class="sidebar"></div></div>');
@@ -39,7 +43,7 @@ describe('StickySidebar', function () {
             $('.sidebar').height(1800);
             $('#container').stickySidebar();
             expect($(window)).toHaveEvent('scroll');
-            expect($(window).data('events')['scroll'][0].namespace).toEqual('sticky_sidebar');
+            expect($(window).data('events').scroll[0].namespace).toEqual('sticky_sidebar');
         });
     });
 

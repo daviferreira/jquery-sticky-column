@@ -1,11 +1,10 @@
 /*jslint browser:true */
 /*global jQuery*/
 
-(function ($, window, undefined) {
+(function ($, window) {
     'use strict';
 
     var pluginName = 'stickySidebar',
-        document = window.document,
         defaults = {
             sidebar: '.sidebar',
             content: '.content',

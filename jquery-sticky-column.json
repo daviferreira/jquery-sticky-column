@@ -1,11 +1,12 @@
 {
-    "name": "jquery_sticky_sidebar",
-    "title": "jQuery Sticky Sidebar",
-    "description": "jQuery plugin that allow you add sticky sidebars to your content.",
+    "name": "jquery-sticky-column",
+    "title": "jQuery Sticky Column",
+    "description": "jQuery plugin that allow you add sticky column to your content.",
     "keywords": [
         "sidebar",
         "navigation",
-        "sticky"
+        "sticky",
+        "column"
     ],
     "version": "1.0.0",
     "author": {
@@ -25,10 +26,10 @@
             "url": "https://fedoraproject.org/wiki/Licensing/Beerware"
         }
     ],
-    "bugs": "https://github.com/daviferreira/jquery_sticky_sidebar/issues",
-    "homepage": "http://daviferreira.github.com/jquery_sticky_sidebar/",
-    "docs": "http://daviferreira.github.com/jquery_sticky_sidebar/",
-    "download": "https://github.com/daviferreira/jquery_sticky_sidebar",
+    "bugs": "https://github.com/daviferreira/jquery-sticky-column/issues",
+    "homepage": "http://daviferreira.github.com/jquery-sticky-column/",
+    "docs": "http://daviferreira.github.com/jquery-sticky-column/",
+    "download": "https://github.com/daviferreira/jquery-sticky-column",
     "dependencies": {
         "jquery": ">=1.5"
     }

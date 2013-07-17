@@ -5,3 +5,6 @@ tmp/
 node_modules/
 _SpecRunner.html
 npm-*.log
+.grunt/
+coverage/
+reports/
