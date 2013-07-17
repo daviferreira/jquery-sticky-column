@@ -1,10 +1,10 @@
-# jQuery StickySidebar plugin
+# jQuery StickyColumn plugin
 
 ## Usage
 
-    $('#content').stickySidebar();
+    $('#content').stickyColumn();
 
-    $('#content-2').stickySidebar({
-        'sidebar': '.my-sidebar',
+    $('#content-2').stickyColumn({
+        'column': '.my-column',
         'content': '#my-content'
     });
