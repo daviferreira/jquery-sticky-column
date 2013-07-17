@@ -148,7 +148,7 @@ describe('StickyColumn', function () {
                 window.scrollTo(0, 850);
                 $(window).trigger('scroll');
                 expect($('.jquery-sticky-column')).not.toHaveClass('jquery-sticky-column-top-fixed');
-                expect($.fn.css).toHaveBeenCalledWith('top', '');
+                expect($.fn.css).toHaveBeenCalled();
                 expect($('.jquery-sticky-column').css('top')).toBe('auto');
             });
         });
