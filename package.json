@@ -1,19 +1,19 @@
 {
-  "name": "stickysidebar",
-  "title": "jQuery Sticky Sidebar plugin",
-  "description": "jQuery plugin that allow you add sticky sidebars to your content.",
+  "name": "jquery-sticky-column",
+  "title": "jQuery Sticky Column plugin",
+  "description": "jQuery plugin that allow you add sticky columns to your content.",
   "version": "0.1.0",
-  "homepage": "https://github.com/daviferreira/jquery_sticky_sidebar/",
+  "homepage": "https://github.com/daviferreira/jquery-sticky-column/",
   "author": {
     "name": "Davi Ferreira",
     "url": "http://daviferreira.com/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/daviferreira/jquery_sticky_sidebar.git"
+    "url": "git://github.com/daviferreira/jquery-sticky-column.git"
   },
   "bugs": {
-    "url": "https://github.com/daviferreira/jquery_sticky_sidebar/issues"
+    "url": "https://github.com/daviferreira/jquery-sticky-column/issues"
   },
   "licenses": [
     {
