@@ -1,6 +1,6 @@
 /*global $, it, expect, spyOn, describe, beforeEach,
          setFixtures, setStyleFixtures*/
-describe('StickySidebar', function () {
+describe('StickyColumn', function () {
 
     'use strict';
 
@@ -10,40 +10,40 @@ describe('StickySidebar', function () {
                 return (this.actual.data('events')) && (typeof this.actual.data('events')[eventType] === 'object');
             }
         });
-        setFixtures('<div id="container"><div class="content"></div><div class="sidebar"></div></div>');
+        setFixtures('<div id="container"><div class="content"></div><div class="column"></div></div>');
         setStyleFixtures('#container{position: relative;}.bottom-fixed {position: fixed; bottom: 0;}.top-fixed {position: fixed; top: 0;}');
     });
 
     it('should be a jQuery plugin', function () {
-        expect(typeof $.fn.stickySidebar).toEqual('function');
+        expect(typeof $.fn.stickyColumn).toEqual('function');
     });
 
     describe('Invalid scenarios', function () {
-        it('should do nothing when sidebar is greater than content', function () {
+        it('should do nothing when column is greater than content', function () {
             $('.content').height(800);
-            $('.sidebar').height(1000);
-            $('#container').stickySidebar();
+            $('.column').height(1000);
+            $('#container').stickyColumn();
             expect($(window)).not.toHaveEvent('scroll');
             expect(typeof $(window).data('events')).toEqual('undefined');
         });
 
-        it('should do nothing when sidebar is smaller than viewport', function () {
+        it('should do nothing when column is smaller than viewport', function () {
             spyOn($.fn, 'height').andReturn(2000);
             $('.content').height(400);
-            $('.sidebar').height(800);
-            $('#container').stickySidebar();
+            $('.column').height(800);
+            $('#container').stickyColumn();
             expect($(window)).not.toHaveEvent('scroll');
             expect(typeof $(window).data('events')).toEqual('undefined');
         });
     });
 
     describe('Initialization', function () {
-        it('should bind stickySidebar to window.scrollTo event', function () {
+        it('should bind stickyColumn to window.scrollTo event', function () {
             $('.content').height(2000);
-            $('.sidebar').height(1800);
-            $('#container').stickySidebar();
+            $('.column').height(1800);
+            $('#container').stickyColumn();
             expect($(window)).toHaveEvent('scroll');
-            expect($(window).data('events').scroll[0].namespace).toEqual('sticky_sidebar');
+            expect($(window).data('events').scroll[0].namespace).toEqual('sticky_column');
         });
     });
 
@@ -53,30 +53,30 @@ describe('StickySidebar', function () {
         });
 
         describe('Scroll down', function () {
-            it('should add class "bottom-fixed" when scroll reaches the bottom of the sidebar', function () {
+            it('should add class "bottom-fixed" when scroll reaches the bottom of the column', function () {
                 $('.content').height(1000);
-                $('.sidebar').height(500);
-                $('#container').stickySidebar({tolerance: 0});
+                $('.column').height(500);
+                $('#container').stickyColumn({tolerance: 0});
                 window.scrollTo(0, 550);
                 $(window).trigger('scroll');
-                expect($('.sidebar')).toHaveClass('bottom-fixed');
+                expect($('.column')).toHaveClass('bottom-fixed');
             });
 
             it('should remove "scrolling-up" class if it exists and add "scrolling-down"', function () {
                 $('.content').height(1000);
-                $('.sidebar').height(500);
-                $('#container').stickySidebar({tolerance: 0});
-                $('.sidebar').addClass('scrolling-up');
+                $('.column').height(500);
+                $('#container').stickyColumn({tolerance: 0});
+                $('.column').addClass('scrolling-up');
                 window.scrollTo(0, 550);
                 $(window).trigger('scroll');
-                expect($('.sidebar')).toHaveClass('scrolling-down');
-                expect($('.sidebar')).not.toHaveClass('scrolling-up');
+                expect($('.column')).toHaveClass('scrolling-down');
+                expect($('.column')).not.toHaveClass('scrolling-up');
             });
 
-            it('should calculate absolute offset if sidebar has class top-fixed', function () {
+            it('should calculate absolute offset if column has class top-fixed', function () {
                 $('.content').height(2000);
-                $('.sidebar').height(500);
-                $('#container').stickySidebar({tolerance: 0});
+                $('.column').height(500);
+                $('#container').stickyColumn({tolerance: 0});
                 window.scrollTo(0, 2000);
                 $(window).trigger('scroll');
                 window.scrollTo(0, 1800);
@@ -85,53 +85,53 @@ describe('StickySidebar', function () {
                 $(window).trigger('scroll');
                 window.scrollTo(0, 1200);
                 $(window).trigger('scroll');
-                expect($('.sidebar')).not.toHaveClass('top-fixed');
-                expect($('.sidebar')).toHaveClass('scrolling-down');
-                expect($('.sidebar')).toHaveCss({position: 'absolute',
-                                                 top: '822px'});
+                expect($('.column')).not.toHaveClass('top-fixed');
+                expect($('.column')).toHaveClass('scrolling-down');
+                expect($('.column')).toHaveCss({position: 'absolute',
+                                                 top: '836px'});
             });
         });
 
         describe('Scroll up', function () {
 
-            it('should add class "top-fixed" when sidebar reaches the top of the sidebar', function () {
+            it('should add class "top-fixed" when column reaches the top of the column', function () {
                 $('.content').height(2000);
-                $('.sidebar').height(500);
-                $('#container').stickySidebar({tolerance: 0});
+                $('.column').height(500);
+                $('#container').stickyColumn({tolerance: 0});
                 window.scrollTo(0, 2000);
                 $(window).trigger('scroll');
                 window.scrollTo(0, 1800);
                 $(window).trigger('scroll');
                 window.scrollTo(0, 1000);
                 $(window).trigger('scroll');
-                expect($('.sidebar')).toHaveClass('top-fixed');
+                expect($('.column')).toHaveClass('top-fixed');
             });
 
             it('should remove "scrolling-down" class if it exists and add "scrolling-up"', function () {
                 $('.content').height(1000);
-                $('.sidebar').height(500);
-                $('#container').stickySidebar({tolerance: 0});
+                $('.column').height(500);
+                $('#container').stickyColumn({tolerance: 0});
                 window.scrollTo(0, 850);
                 $(window).trigger('scroll');
                 window.scrollTo(0, 800);
                 $(window).trigger('scroll');
-                expect($('.sidebar')).toHaveClass('scrolling-up');
-                expect($('.sidebar')).not.toHaveClass('scrolling-down');
+                expect($('.column')).toHaveClass('scrolling-up');
+                expect($('.column')).not.toHaveClass('scrolling-down');
             });
 
-            it('should calculate absolute offset if sidebar has class bottom-fixed', function () {
+            it('should calculate absolute offset if column has class bottom-fixed', function () {
                 $('.content').height(1000);
-                $('.sidebar').height(500);
-                $('#container').stickySidebar({tolerance: 0});
+                $('.column').height(500);
+                $('#container').stickyColumn({tolerance: 0});
                 window.scrollTo(0, 850);
                 $(window).trigger('scroll');
-                expect($('.sidebar')).toHaveClass('bottom-fixed');
+                expect($('.column')).toHaveClass('bottom-fixed');
                 window.scrollTo(0, 830);
                 $(window).trigger('scroll');
-                expect($('.sidebar')).not.toHaveClass('bottom-fixed');
-                expect($('.sidebar')).toHaveClass('scrolling-up');
-                expect($('.sidebar')).toHaveCss({position: 'absolute',
-                                                 top: '140px'});
+                expect($('.column')).not.toHaveClass('bottom-fixed');
+                expect($('.column')).toHaveClass('scrolling-up');
+                expect($('.column')).toHaveCss({position: 'absolute',
+                                                 top: '154px'});
             });
         });
 

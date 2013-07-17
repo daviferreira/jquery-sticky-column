@@ -4,9 +4,9 @@
 (function ($, window) {
     'use strict';
 
-    var pluginName = 'stickySidebar',
+    var pluginName = 'stickyColumn',
         defaults = {
-            sidebar: '.sidebar',
+            column: '.column',
             content: '.content',
             tolerance: 110
         },
@@ -29,22 +29,22 @@
     Plugin.prototype.init = function () {
         var self = this;
 
-        this.sidebar = this.root.find(this.options.sidebar);
+        this.column = this.root.find(this.options.column);
         this.content = this.root.find(this.options.content);
         this.lastScrollTop = 0;
 
         if (this.canBeSticky() === true) {
-            $(window).bind('scroll.sticky_sidebar', function () {
+            $(window).bind('scroll.sticky_column', function () {
                 self.setScrollDirection()
                     .setBoundaries()
-                    .positionSidebar();
+                    .positionColumn();
             });
         }
     };
 
     Plugin.prototype.canBeSticky = function () {
-        return this.sidebar.height() < this.content.height() &&
-               this.sidebar.height() > $(window).height();
+        return this.column.height() < this.content.height() &&
+               this.column.height() > $(window).height();
     };
 
     Plugin.prototype.setBoundaries = function () {
@@ -54,52 +54,52 @@
             contentTop: contentTop,
             contentBottom: contentTop + contentHeight,
             contentHeight: contentHeight,
-            sidebarHeight: this.sidebar.outerHeight(),
+            columnHeight: this.column.outerHeight(),
             windowHeight: $(window).height()
         };
         return this;
     };
 
-    Plugin.prototype.positionSidebar = function () {
+    Plugin.prototype.positionColumn = function () {
         if (this.lastScrollTop > this.boundaries.contentTop &&
                 this.lastScrollTop < this.boundaries.contentBottom) {
             this[this.scrollDirection === 'DOWN' ? 'scrollDown' : 'scrollUp']();
         } else if (this.lastScrollTop < this.boundaries.contentTop) {
-            this.sidebar.css('top', '').removeClass('top-fixed');
+            this.column.css('top', '').removeClass('top-fixed');
         }
         return this;
     };
 
     Plugin.prototype.scrollDown = function () {
         var windowScroll = this.lastScrollTop + this.boundaries.windowHeight,
-            sidebarOffsetTop;
-        if (this.sidebar.hasClass('scrolling-up')) {
-            this.sidebar.removeClass('scrolling-up')
+            columnOffsetTop;
+        if (this.column.hasClass('scrolling-up')) {
+            this.column.removeClass('scrolling-up')
                 .addClass('scrolling-down');
-        } else if (this.sidebar.hasClass('top-fixed')) {
-            sidebarOffsetTop = this.sidebar.offset().top - this.boundaries.contentTop;
-            this.sidebar.removeClass('top-fixed')
+        } else if (this.column.hasClass('top-fixed')) {
+            columnOffsetTop = this.column.offset().top - this.boundaries.contentTop;
+            this.column.removeClass('top-fixed')
                 .css({
                     position: 'absolute',
-                    top: sidebarOffsetTop
+                    top: columnOffsetTop
                 })
                 .addClass('scrolling-down');
         }
-        if (this.sidebar.hasClass('scrolling-down')) {
-            if (windowScroll > this.sidebar.offset().top + this.boundaries.sidebarHeight) {
-                this.sidebar.css(clearPosition)
+        if (this.column.hasClass('scrolling-down')) {
+            if (windowScroll > this.column.offset().top + this.boundaries.columnHeight) {
+                this.column.css(clearPosition)
                             .addClass('bottom-fixed')
                             .removeClass('scrolling-down');
             }
         } else {
             if (windowScroll > this.boundaries.contentBottom) {
-                this.sidebar.removeClass('bottom-fixed').css({
+                this.column.removeClass('bottom-fixed').css({
                     position: 'absolute',
-                    top: this.boundaries.contentHeight - this.boundaries.sidebarHeight
+                    top: this.boundaries.contentHeight - this.boundaries.columnHeight
                 });
             } else if (windowScroll + this.options.tolerance >
-                       this.boundaries.sidebarHeight + this.boundaries.contentTop) {
-                this.sidebar.css(clearPosition)
+                       this.boundaries.columnHeight + this.boundaries.contentTop) {
+                this.column.css(clearPosition)
                             .removeClass('top-fixed')
                             .addClass('bottom-fixed');
             }
@@ -107,27 +107,27 @@
     };
 
     Plugin.prototype.scrollUp = function () {
-        if (this.sidebar.hasClass('scrolling-down')) {
-            this.sidebar.removeClass('scrolling-down')
+        if (this.column.hasClass('scrolling-down')) {
+            this.column.removeClass('scrolling-down')
                         .addClass('scrolling-up');
-        } else if (this.sidebar.hasClass('bottom-fixed')) {
-            this.sidebar.css({
+        } else if (this.column.hasClass('bottom-fixed')) {
+            this.column.css({
                 position: 'absolute',
-                top: this.sidebar.offset().top - this.boundaries.contentTop
+                top: this.column.offset().top - this.boundaries.contentTop
             }).removeClass('bottom-fixed').addClass('scrolling-up');
         }
-        if (this.sidebar.hasClass('scrolling-up')) {
-            if (this.lastScrollTop < this.sidebar.offset().top) {
-                this.sidebar.css(clearPosition)
+        if (this.column.hasClass('scrolling-up')) {
+            if (this.lastScrollTop < this.column.offset().top) {
+                this.column.css(clearPosition)
                             .addClass('top-fixed')
                             .removeClass('scrolling-up');
             }
         } else {
             if (this.lastScrollTop < this.boundaries.contentTop) {
-                this.sidebar.css('position', '').removeClass('top-fixed');
+                this.column.css('position', '').removeClass('top-fixed');
             } else if (this.lastScrollTop - this.options.tolerance <
-                       this.boundaries.contentBottom - this.boundaries.sidebarHeight) {
-                this.sidebar.css(clearPosition)
+                       this.boundaries.contentBottom - this.boundaries.columnHeight) {
+                this.column.css(clearPosition)
                             .removeClass('bottom-fixed')
                             .addClass('top-fixed');
             }
