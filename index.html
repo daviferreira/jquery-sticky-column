@@ -5,13 +5,13 @@
     <title>jQuery Stickybar</title>
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/demo.css">
-    <link rel="stylesheet" href="src/jquery.stickysidebar.css">
+    <link rel="stylesheet" href="src/jquery-sticky-column.min.css">
 </head>
 <body>
     <header class="jumbotron subhead" id="overview">
     <div class="container">
-        <h1>jQuery Sticky Sidebar</h1>
-        <p class="lead">Sticky sidebar for your content.</p>
+        <h1>jQuery Sticky Column</h1>
+        <p class="lead">Sticky column for your content.</p>
     </div>
     </header>
     <div class="container" id="my-content">
@@ -128,8 +128,8 @@
 
                 </div>
             </div>
-            <div class="span4" class="sidebar-container">
-                <div class="sidebar">
+            <div class="span4" class="column-container">
+                <div class="column">
                     <p><img src="http://lorempixel.com/output/sports-q-c-300-200-6.jpg" width="300" height="200"></p>
                     <h4>Uuummmm, this is a tasty burger!</h4>
                     <p>Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.  </p>
@@ -269,8 +269,8 @@
 
                 </div>
             </div>
-            <div class="span4" class="sidebar-container">
-                <div class="sidebar">
+            <div class="span4" class="column-container">
+                <div class="column">
                     <p><img src="http://lorempixel.com/output/food-q-c-300-200-5.jpg" width="300" height="200"></p>
                     <h4>Uuummmm, this is a tasty burger!</h4>
                     <p>Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.  </p>
@@ -300,10 +300,10 @@
         </div>
     </footer>
     <script src="javascripts/jquery.min.js"></script>
-    <script src="src/jquery.stickysidebar.js"></script>
+    <script src="src/jquery-sticky-column.min.js"></script>
     <script>
-    $('#my-content').stickySidebar();
-    $('#my-content-2').stickySidebar();
+    $('#my-content').stickyColumn();
+    $('#my-content-2').stickyColumn();
     </script>
 </body>
 </html>

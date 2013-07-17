@@ -4,3 +4,6 @@ tmp/
 .DS_Store
 node_modules/
 _SpecRunner.html
+.grunt/
+coverage/
+reports/
