@@ -88,7 +88,7 @@ describe('StickyColumn', function () {
                 expect($('.column')).not.toHaveClass('jquery-sticky-column-top-fixed');
                 expect($('.column')).toHaveClass('jquery-sticky-column-scrolling-down');
                 expect($('.column')).toHaveCss({position: 'absolute',
-                                                 top: '808px'});
+                                                top: ($('.column:first').offset().top - $('.content:first').offset().top) + 'px'});
             });
         });
 
@@ -131,7 +131,7 @@ describe('StickyColumn', function () {
                 expect($('.column')).not.toHaveClass('jquery-sticky-column-bottom-fixed');
                 expect($('.column')).toHaveClass('jquery-sticky-column-scrolling-up');
                 expect($('.column')).toHaveCss({position: 'absolute',
-                                                 top: '98px'});
+                                                 top: ($('.column:first').offset().top - $('.content:first').offset().top) + 'px'});
             });
         });
 
